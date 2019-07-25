@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function Form(props) {
   const [values, setValues] = useState({ name: "", email: "", role: "" });
-
-  useEffect(() => {
-    props.edit && setValues(props.oldMember);
-  }, [props.oldMember, props.edit]);
 
   const handleChange = event => {
     event.persist();
@@ -15,9 +11,7 @@ function Form(props) {
   const handleSubmit = event => {
     event.preventDefault();
     console.log("This should update the state in App with", values);
-    props.edit
-      ? props.editMember(values, props.oldMember.index)
-      : props.addMember(values);
+    props.addMember(values);
     setValues({ name: "", email: "", role: "" });
   };
 
@@ -45,7 +39,7 @@ function Form(props) {
           value={values.role}
           onChange={handleChange}
         />
-        <button type="submit">{props.edit ? "Edit" : "Submit"}</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
